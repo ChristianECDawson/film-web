@@ -9,3 +9,9 @@ const filmApiClient = axios.create({
 export async function createFilm({ title }) {
     return await filmApiClient.post('/films', { title: title }) 
 };
+
+export async function fetchFilms(){
+  const response = await filmApiClient.get('/films') // TODO cleanup -might crash under some circumstances
+  console.log("FETCH RETURNED", response)
+  return response.data;
+};

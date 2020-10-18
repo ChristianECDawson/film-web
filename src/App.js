@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
+import {isEmpty} from "lodash";
 import logo from './logo.svg';
 import './App.css';
-import { createFilm } from "./services/FilmApiService";
+import { createFilm, fetchFilms } from "./services/FilmApiService";
 
 function App() {
   const { register, handleSubmit, watch, errors } = useForm();
+  const [films, setFilms] = useState([]);
   
-  function onSubmit({ title }) {
+  async function refreshFilms() {
+    const _films = await fetchFilms();
+    console.log("FILMS", _films);
+    
+    setFilms(_films);
+  }
+
+  useEffect(() => {
+    refreshFilms();
+  }, []); // run once, or whenever a dependency changes
+
+  async function onSubmit({ title }) {
     try {
-      createFilm({ title: title });
+      await createFilm({ title: title });
+      refreshFilms();
     } catch (err) {
       console.log(err);
     }
   };
+
+  function renderFilm(film, index) {
+    return <li key={`film_${index}`}>{film.title}</li>
+  }
 
   return (
     <div className="App">
@@ -26,14 +44,11 @@ function App() {
             
             <input type="submit" />
           </form>        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          {!isEmpty(films) && (
+          <ul>
+            {films.map(renderFilm)}
+          </ul>
+          )}
       </header>
     </div>
   );
