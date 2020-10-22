@@ -33,6 +33,24 @@ function App() {
     return <li key={`film_${index}`}>{film.title}</li>
   }
 
+//  function filmFilter() {
+//    const input = document.getElementById('filmSearch');
+//    const filter = input.value.toUpperCase();
+//    const ul = document.getElementById("films");
+//    const li = ul.getElementsByTagName('li');
+  
+    // Loop through all list items, and hide those who don't match the search query
+//    for (const i = 0; i < li.length; i++) {
+//      const a = li[i].getElementsByTagName("a")[0];
+//      const txtValue = a.textContent || a.innerText;
+//      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//        li[i].style.display = "";
+//      } else {
+//        li[i].style.display = "none";
+//      }
+//    }
+//  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -43,9 +61,10 @@ function App() {
             {errors.titleRequired && <span>This field is required</span>}
             
             <input type="submit" />
-          </form>        
+          </form>
+          <input type="text" id="filmSearch" placeholder="Search for films.."></input>        
           {!isEmpty(films) && (
-          <ul>
+          <ul id = "films">
             {films.map(renderFilm)}
           </ul>
           )}
