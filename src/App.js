@@ -62,7 +62,7 @@ function App() {
             
             <input type="submit" />
           </form>
-          <input type="text" id="filmSearch" placeholder="Search for films.."></input>        
+          <input type="text" id="filmSearch" onKeyDown = "filmFilter" placeholder="Search for films.."></input>        
           {!isEmpty(films) && (
           <ul id = "films">
             {films.map(renderFilm)}
