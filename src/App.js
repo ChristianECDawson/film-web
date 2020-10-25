@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
 import {isEmpty} from "lodash";
 import logo from './logo.svg';
 import './App.css';
 import { createFilm, fetchFilms } from "./services/FilmApiService";
+import CreateFilmForm from "./components/CreateFilmForm";
+import SearchFilmForm from "./components/SearchFilmForm";
 
 function App() {
-  const { register, handleSubmit, watch, errors } = useForm();
   const [films, setFilms] = useState([]);
+  const [title, setTitle] = useState(null);
   
   async function refreshFilms() {
-    const _films = await fetchFilms();
+    const _films = await fetchFilms({title: title});
     console.log("FILMS", _films);
     
     setFilms(_films);
@@ -18,7 +19,7 @@ function App() {
 
   useEffect(() => {
     refreshFilms();
-  }, []); // run once, or whenever a dependency changes
+  }, [title]); // run once, or whenever a dependency changes
 
   async function onSubmit({ title }) {
     try {
@@ -29,40 +30,20 @@ function App() {
     }
   };
 
+  async function handleTitleChange({ title }){
+    setTitle(title)
+  }
+
   function renderFilm(film, index) {
     return <li key={`film_${index}`}>{film.title}</li>
   }
-
-//  function filmFilter() {
-//    const input = document.getElementById('filmSearch');
-//    const filter = input.value.toUpperCase();
-//    const ul = document.getElementById("films");
-//    const li = ul.getElementsByTagName('li');
-  
-    // Loop through all list items, and hide those who don't match the search query
-//    for (const i = 0; i < li.length; i++) {
-//      const a = li[i].getElementsByTagName("a")[0];
-//      const txtValue = a.textContent || a.innerText;
-//      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//        li[i].style.display = "";
-//      } else {
-//        li[i].style.display = "none";
-//      }
-//    }
-//  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="title">Title</label>
-            <input name="title" ref={register({ required: true })} />            
-            {errors.titleRequired && <span>This field is required</span>}
-            
-            <input type="submit" />
-          </form>
-          <input type="text" id="filmSearch" onKeyDown = "filmFilter" placeholder="Search for films.."></input>        
+          <CreateFilmForm onSubmit={onSubmit} />
+          <SearchFilmForm onTitleChange = {handleTitleChange} />
           {!isEmpty(films) && (
           <ul id = "films">
             {films.map(renderFilm)}
@@ -74,3 +55,12 @@ function App() {
 }
 
 export default App;
+
+/* Theming
+- extract the two forms into separate components
+- style each with emotion (suggest just add color for a start)
+- create a theme
+- use theme to apply color
+- create a form for choosing theme
+- update theme based on choice
+*/
