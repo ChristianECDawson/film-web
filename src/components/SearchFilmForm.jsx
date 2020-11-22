@@ -1,5 +1,7 @@
 import React, { useEffect } from "react"
 import { useForm } from "react-hook-form";
+import { css, jsx } from '@emotion/react';
+import styled from '@emotion/styled';
 
 // Read docs on Pure Components in React
 // TODO internationalization
@@ -13,11 +15,15 @@ function SearchFilmForm(props) {
     }, [title]);
 
     return (
-        <form>
+        <Search_Film_Form>
           <label htmlFor="title">Search</label>
             <input name="title" ref={register({ required: true })} />   
-        </form>  
+        </Search_Film_Form>  
     )
 }
+
+const Search_Film_Form = styled.form`
+  font-size: 50px;
+`;
 
 export default SearchFilmForm
