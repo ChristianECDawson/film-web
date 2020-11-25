@@ -23,7 +23,8 @@ function SearchFilmForm(props) {
 }
 
 const Search_Film_Form = styled.form`
-  font-size: 50px;
+    grid-area: sidebar;
+    font-size: 50px;
 `;
 
 export default SearchFilmForm

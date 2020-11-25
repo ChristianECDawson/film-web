@@ -13,7 +13,9 @@ function FilmList(props) {
         return null;
     }
     return (
-        <ul id = "films">
+        <ul id = "films" style = {css`
+            grid-area: main;
+        `}>
             {films.map(renderFilm)}
         </ul>
     )

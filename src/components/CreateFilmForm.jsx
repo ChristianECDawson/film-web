@@ -20,7 +20,8 @@ function CreateFilmForm(props) {
 }
 
 const Create_Film_Form = styled.form`
-  font-size: 50px;
+    grid-area: sidebar;
+    font-size: 50px;
 `;
 
 export default CreateFilmForm
