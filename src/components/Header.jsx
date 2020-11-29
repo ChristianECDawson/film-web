@@ -6,7 +6,6 @@ function Header(props) {
 
     return (
         <header css = {css`
-            grid-area: header;
             background-color: ${backgroundColor};
             color: ${textColor};
             font-size: 50px;

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react"
-import { useForm } from "react-hook-form";
+/** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import styled from '@emotion/styled';
+import { useEffect } from "react"
+import { useForm } from "react-hook-form";
+
 
 // Read docs on Pure Components in React
 // TODO internationalization
@@ -12,19 +13,17 @@ function SearchFilmForm(props) {
 
     useEffect(() => {
         onTitleChange({title : title})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [title]);
 
     return (
-        <Search_Film_Form>
-          <label htmlFor="title">Search</label>
+        <div style = {css`
+            font-size: 50px
+        `}>
+            <label htmlFor="title">Search</label>
             <input name="title" ref={register({ required: true })} />   
-        </Search_Film_Form>  
+        </div>  
     )
 }
-
-const Search_Film_Form = styled.form`
-    grid-area: sidebar;
-    font-size: 50px;
-`;
 
 export default SearchFilmForm

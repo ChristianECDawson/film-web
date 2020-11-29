@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
-import {isEmpty, isNil } from "lodash";
+import { isEmpty } from "lodash";
 
 function FilmList(props) {
     const {films} = props; 
@@ -13,8 +13,8 @@ function FilmList(props) {
         return null;
     }
     return (
-        <ul id = "films" style = {css`
-            grid-area: main;
+        <ul id = "films" css = {css`
+        line-height: 2;
         `}>
             {films.map(renderFilm)}
         </ul>

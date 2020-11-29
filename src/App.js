@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
 import { createFilm, fetchFilms } from "./services/FilmApiService";
-import CreateFilmForm from "./components/CreateFilmForm";
-import SearchFilmForm from "./components/SearchFilmForm";
-import Button from "./components/Button";
-import Container from "./components/Container";
-import PrimaryButton from './components/PrimaryButton';
-import FilmList from './components/FilmList';
-import Header from './components/Header';
 import HomePageLayout from './components/HomePageLayout';
 
 function App() {
@@ -26,6 +18,7 @@ function App() {
 
     useEffect(() => {
         refreshFilms();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [title]); // run once, or whenever a dependency changes
 
     async function onSubmit({ title }) {
@@ -46,28 +39,7 @@ function App() {
     }
 
     return ( 
-        <HomePageLayout onSubmit={onSubmit} onTitleChange={onTitleChange} films={films} />
-        //     <App_Main>
-
-        //         <Header textColor = "hotpink"> Button component </Header>
-
-        //         <Container row>
-        //             <Button as = "a" href = "https://www.linkedin.com/in/christian-dawson-674b841b6/"> Linked < a > In </a></Button >
-        //             <PrimaryButton > Value </PrimaryButton> 
-        //             <Button backgroundColor = "green" textColor = "white" > Green </Button> 
-        //             <Button backgroundColor = "red" textColor = "white" > Red </Button> 
-        //             <Button backgroundColor = "yellow" > Yellow </Button> 
-        //         </Container>
-
-        //         <Container row >
-        //             <CreateFilmForm onSubmit = { onSubmit }/> 
-        //             <SearchFilmForm onTitleChange = { handleTitleChange }/>
-        //         </Container>
-
-        //         <FilmList films = { films }/>
-
-        //     </App_Main>
-        // </HomePageLayout>    
+        <HomePageLayout onSubmit={onSubmit} onTitleChange={handleTitleChange} films={films} />  
     );
 
 }

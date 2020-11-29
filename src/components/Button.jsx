@@ -6,7 +6,6 @@ function Button(props) {
 
     return (
         <button css = {css`
-            grid-area: nav;
             background-color: ${backgroundColor};
             color: ${textColor};
             padding: 10px;
